@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
 import { format, addDays, startOfWeek, endOfWeek, startOfMonth, endOfMonth, getDay, subDays, setMonth, setYear } from 'date-fns';
+
 
 @Component({
   selector: 'app-scheduler',
@@ -115,5 +115,10 @@ export class SchedulerComponent implements OnInit {
     return currentPeriod === period && currentHour === hourMinute.split(':')[0] && currentMinute >= '00' && currentMinute <= '29';
   }
 
+  onDateClick(date: Date) {
+    // You can customize the alert message here
+    const formattedDate = this.formatDay(date);
+    alert(`You clicked on ${formattedDate}`);
+  }
 
 }
