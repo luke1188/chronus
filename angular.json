@@ -93,6 +93,72 @@
           }
         }
       }
+    },
+    "my-calendar-lib": {
+      "projectType": "library",
+      "root": "projects/my-calendar-lib",
+      "sourceRoot": "projects/my-calendar-lib/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/my-calendar-lib/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/my-calendar-lib/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/my-calendar-lib/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "projects/my-calendar-lib/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        }
+      }
+    },
+    "chronus-scheduler": {
+      "projectType": "library",
+      "root": "projects/chronus-scheduler",
+      "sourceRoot": "projects/chronus-scheduler/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/chronus-scheduler/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/chronus-scheduler/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/chronus-scheduler/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "projects/chronus-scheduler/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        }
+      }
     }
   }
 }

@@ -11,6 +11,14 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
+    "paths": {
+      "chronus-scheduler": [
+        "dist/chronus-scheduler"
+      ],
+      "my-calendar-lib": [
+        "dist/my-calendar-lib"
+      ]
+    },
     "declaration": false,
     "downlevelIteration": true,
     "experimentalDecorators": true,

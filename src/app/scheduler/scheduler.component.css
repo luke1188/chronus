@@ -1,0 +1,152 @@
+.scheduler {
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  /* Display as a column layout */
+  align-items: center;
+  /* Center content horizontally */
+  justify-content: flex-start;
+  /* Align content to the top */
+  padding: 20px;
+  /* Set the width to 100% */
+  /* Set the height to 100% */
+}
+
+
+.view-buttons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.view-buttons button {
+  padding: 10px 20px;
+  font-size: 14px;
+  margin: 0 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.view-buttons button:hover {
+  background-color: #0056b3;
+}
+
+.current-date {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.calendar {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  width: 800px;
+  /* Set the width to 100% */
+  height: 375px;
+  /* Set the height to 100% */
+}
+
+.week-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+  background-color: #007bff;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 5px 5px 0 0;
+}
+
+.day-header {
+  width: calc(100% / 7);
+  text-align: center;
+  padding: 5px 0;
+}
+
+/* Week View */
+.week-view {
+  display: block;
+}
+
+.week-view-container {
+  width: 100%;
+  height: 350px;
+  overflow: hidden;
+  /* Set a fixed height */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  overflow-y: auto;
+  /* Add a vertical scrollbar if content overflows */
+}
+
+.week-table {
+  width: 100%;
+  border-collapse: collapse;
+  /* margin-top: 10px; Remove this margin */
+}
+.week-table th,
+.week-table td {
+  padding: 10px;
+  text-align: center;
+  border: 1px solid #ccc;
+}
+
+
+
+.week-time-slot {
+  background-color: #f5f5f5;
+}
+
+.week-time-slot:hover {
+  background-color: #ddd;
+  cursor: pointer;
+}
+
+
+.month-view .month-grid {
+  display: grid;
+  grid-gap: 5px;
+  width: 100%;
+}
+
+.month-view .week {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.month-view .day {
+  text-align: center;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  min-height: 60px;
+  /* Reduce minimum height for day cells */
+  flex-basis: calc(100% / 7);
+  /* Distribute equally within a week row */
+  box-sizing: border-box;
+}
+
+.month-view .day:not(.current-month) {
+  background-color: #f0f0f0;
+  /* Background color for days from previous/next months */
+}
+
+.month-view .day:hover {
+  background-color: #ddd;
+  /* Hover background color for all days */
+  transition: background-color 0.2s;
+}

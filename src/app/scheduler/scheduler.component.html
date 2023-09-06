@@ -1,0 +1,62 @@
+<div class="scheduler">
+  <div class="view-buttons">
+    <button (click)="switchView('day')">Day</button>
+    <button (click)="switchView('week')">Week</button>
+    <button (click)="switchView('month')">Month</button>
+  </div>
+
+  <!-- Month/Year Selector -->
+  <div class="month-year-selector" *ngIf="currentView === 'month'">
+    <select [(ngModel)]="selectedMonth">
+      <option *ngFor="let month of months; let i = index" [value]="i">{{ month }}</option>
+    </select>
+    <input type="number" [(ngModel)]="selectedYear" placeholder="Year">
+    <button (click)="changeMonth()">Go</button>
+  </div>
+
+  <div class="current-date">{{ currentDate }}</div>
+
+  <div class="calendar">
+    <div class="week-header">
+      <div class="day-header" *ngFor="let day of weekDays">{{ day }}</div>
+    </div>
+
+    <!-- Month View -->
+    <div *ngIf="currentView === 'month'" class="month-view">
+      <div class="month-grid">
+        <div *ngFor="let week of weeks" class="week">
+          <div *ngFor="let day of week" class="day">
+            {{ formatDay(day) }}
+            <!-- Add month view content here -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Week View -->
+    <div *ngIf="currentView === 'week'" class="week-view-container">
+      <table class="week-table">
+        <thead>
+          <tr>
+            <th></th> <!-- Empty cell for spacing -->
+            <th *ngFor="let day of weekDays" class="week-day"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let timeSlot of timeSlots">
+            <td class="week-time-slot">{{ timeSlot }}</td>
+            <!-- Add schedule content here for each time slot -->
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Day View -->
+    <div *ngIf="currentView === 'day'" class="day-view-container">
+      <div class="day">
+        {{ formatDay(schedule[0]) }}
+        <!-- Add day view content here -->
+      </div>
+    </div>
+  </div>
+</div>
