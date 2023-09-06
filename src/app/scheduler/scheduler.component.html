@@ -17,8 +17,13 @@
   <div class="current-date">{{ currentDate }}</div>
 
   <div class="calendar">
-    <div class="week-header">
-      <div class="day-header" *ngFor="let day of weekDays">{{ day }}</div>
+    <div *ngIf="currentView === 'month'" class="day-header">
+      <!-- Display weekdays for Month View -->
+      <div *ngFor="let day of weekDays">
+        <div *ngIf="currentView === 'month'" >
+          {{ day }}
+        </div>
+      </div>
     </div>
 
     <!-- Month View -->
@@ -38,14 +43,19 @@
       <table class="week-table">
         <thead>
           <tr>
-            <th></th> <!-- Empty cell for spacing -->
-            <th *ngFor="let day of weekDays" class="week-day"></th>
+            <th ></th> <!-- Header for time slot column -->
+            <th *ngFor="let day of weekDays" class="week-day">{{ day }}</th>
           </tr>
         </thead>
         <tbody>
+          <!-- Add time slots and schedule content for Week View here -->
           <tr *ngFor="let timeSlot of timeSlots">
-            <td class="week-time-slot">{{ timeSlot }}</td>
-            <!-- Add schedule content here for each time slot -->
+            <td [ngClass]="{'current-time-slot': isCurrentTimeSlot(timeSlot)}">
+              {{ timeSlot }} {{isCurrentTimeSlot(timeSlot)}}
+            </td>
+            <td *ngFor="let day of weekDays" class="week-day">
+              <!-- Add content for the day -->
+            </td>
           </tr>
         </tbody>
       </table>
@@ -60,3 +70,4 @@
     </div>
   </div>
 </div>
+<div>{{currentTime}}</div>
