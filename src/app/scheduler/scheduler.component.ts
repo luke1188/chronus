@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 import { format, addDays, startOfWeek, endOfWeek, startOfMonth, endOfMonth, getDay, subDays, setMonth, setYear } from 'date-fns';
+
 
 
 @Component({
@@ -7,7 +8,7 @@ import { format, addDays, startOfWeek, endOfWeek, startOfMonth, endOfMonth, getD
   templateUrl: './scheduler.component.html',
   styleUrls: ['./scheduler.component.css']
 })
-export class SchedulerComponent implements OnInit {
+export class SchedulerComponent implements OnInit, AfterViewInit {
   currentDate: string = '';
   currentTime: Date = new Date();
   schedule: Date[] = [];
@@ -18,7 +19,7 @@ export class SchedulerComponent implements OnInit {
   '8:00 AM', '8:30 AM', '9:00 AM', '9:30 AM', '10:00 AM', '10:30 AM', '11:00 AM', '11:30 AM',
   '12:00 PM', '12:30 PM', '1:00 PM', '1:30 PM', '2:00 PM', '2:30 PM', '3:00 PM', '3:30 PM',
   '4:00 PM', '4:30 PM', '5:00 PM', '5:30 PM', '6:00 PM', '6:30 PM', '7:00 PM', '7:30 PM',
-  '8:00 PM', '8:30 PM', '9:00 PM', '9:30 PM', '10:00 PM', '10:30 PM', '11:00 PM', '11:30 PM',
+  '8:00 PM', '8:30 PM', '9:00 PM', '9:30 PM', '10:00 PM', '10:30 PM', '11:00 PM', '11:30 PM', '11:59 AM',
 ];
 
   currentView: 'day' | 'week' | 'month' = 'month'; // Default view
@@ -32,6 +33,8 @@ export class SchedulerComponent implements OnInit {
 
   constructor() { }
 
+  @ViewChild('weekViewContainer') weekViewContainer!: ElementRef;
+
   updateCurrentTime() {
     this.currentTime = new Date();
   }
@@ -43,6 +46,27 @@ export class SchedulerComponent implements OnInit {
     setInterval(() => {
       this.updateCurrentTime();
     }, 60000); // Update every minute (adjust as needed)
+  }
+
+  scrollToCurrentTime() {
+    const now = new Date();
+    const currentHour = now.getHours();
+    const currentMinutes = now.getMinutes();
+    const totalMinutes = currentHour * 60 + currentMinutes; // Total minutes from midnight
+    const rowHeight = 60; // Height of each row (adjust as needed)
+
+    // Calculate the scroll position based on the time
+    const scrollPosition = (totalMinutes / 60) * rowHeight;
+
+    if (this.weekViewContainer.nativeElement) {
+     this.weekViewContainer.nativeElement.scrollTop = scrollPosition;
+    }
+  }
+
+  ngAfterViewInit() {
+    if (this.currentView === 'week') {
+      this.scrollToCurrentTime(); // Scroll to current time on Week View initialization
+    }
   }
 
   generateSchedule(): void {

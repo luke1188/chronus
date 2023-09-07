@@ -17,49 +17,53 @@
   <div class="current-date">{{ currentDate }}</div>
 
   <div class="calendar">
-    <div *ngIf="currentView === 'month'" class="day-header">
-      <!-- Display weekdays for Month View -->
-      <div *ngFor="let day of weekDays">
-        <div *ngIf="currentView === 'month'" >
-          {{ day }}
-        </div>
-      </div>
-    </div>
+
 
     <!-- Month View -->
     <div *ngIf="currentView === 'month'" class="month-view">
-      <div class="month-grid">
-        <div *ngFor="let week of weeks" class="week">
-          <button *ngFor="let day of week" class="day" (click)="onDateClick(day)">
-            {{ formatDay(day) }}
-            <!-- Add month view content here -->
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Week View -->
-    <div *ngIf="currentView === 'week'" class="week-view-container">
-      <table class="week-table">
-        <thead >
-          <tr >
-            <th ></th> <!-- Header for time slot column -->
-            <th *ngFor="let day of weekDays" >{{ day }}</th>
+      <table class="month-table">
+        <thead>
+          <tr>
+            <th *ngFor="let day of weekDays" class="month-day-header">{{ day }}</th>
           </tr>
         </thead>
         <tbody>
-          <!-- Add time slots and schedule content for Week View here -->
-          <tr *ngFor="let timeSlot of timeSlots">
-            <td [ngClass]="{'current-time-slot': isCurrentTimeSlot(timeSlot)}">
-              {{ timeSlot }} {{isCurrentTimeSlot(timeSlot)}}
-            </td>
-            <td *ngFor="let day of weekDays" class="week-day">
-              <!-- Add content for the day -->
+          <tr *ngFor="let week of weeks">
+            <td *ngFor="let day of week" class="month-day" (click)="onDateClick(day)">
+              {{ formatDay(day) }}
+              <!-- Add month view content here -->
             </td>
           </tr>
         </tbody>
       </table>
     </div>
+
+
+    <!-- Week View -->
+    <div *ngIf="currentView === 'week'" class="week-view-container" #weekViewContainer>
+      <table class="week-table">
+        <thead>
+          <tr>
+            <th class="day-header"></th> <!-- Header for time slot column -->
+            <th *ngFor="let day of weekDays" class="week-day">{{ day }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Add time slots and schedule content for Week View here -->
+          <tr *ngFor="let timeSlot of timeSlots">
+            <td>{{timeSlot}} {{isCurrentTimeSlot(timeSlot)}}</td> <!-- Empty cell for time slot column -->
+            <td *ngFor="let day of weekDays" class="week-day">
+              <!-- Add content for the day -->
+            </td>
+          </tr>
+          <!-- Current time slot line -->
+          <tr>
+            <td class="current-time-slot-line" ></td> <!-- Colspan to span all days -->
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
 
     <!-- Day View -->
     <div *ngIf="currentView === 'day'" class="day-view-container">

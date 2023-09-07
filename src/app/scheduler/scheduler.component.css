@@ -71,48 +71,7 @@ body {
 
 
 /* Month View */
-.month-view .week {
-  display: flex;
-  flex-wrap: wrap;
-  width: 100%;
-}
-
-.month-view .day {
-  text-align: center;
-  padding: 10px;
-  border: 1px solid #ccc;
-  background-color: #fff;
-  min-height: 100px;
-  flex: 1;
-  box-sizing: border-box;
-}
-
-/* Month View Header */
-.day-header {
-  display: flex;
-  text-align: center;
-  justify-content: space-between;
-  padding: 5px;
-  background-color: #007bff;
-  color: #fff;
-  font-weight: bold;
-  border-left: 1px solid black;
-}
-
-
-/* Inactive Month Days */
-.month-view .day:not(.current-month) {
-  background-color: #f0f0f0;
-}
-
-/* Hover Effect for Week Day */
-.month-view .day:hover {
-  background-color: #ddd;
-  cursor: pointer;
-}
-
-/* Week View Container */
-.week-view-container {
+.month-view {
   width: 100%;
   overflow-x: auto;
   background-color: #fff;
@@ -120,7 +79,52 @@ body {
   border-radius: 0 0 5px 5px;
 }
 
-/* Week Table */
+.month-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  /* Fix the table layout to make columns equal width */
+}
+
+.month-table th,
+.month-table td {
+  padding: 10px;
+  text-align: center;
+  border: 1px solid #ccc;
+  width: calc(100% / 7);
+  /* Divide the table into 7 equal-width columns */
+}
+
+.month-day-header {
+  background-color: #007bff;
+  color: #fff;
+  font-weight: bold;
+}
+
+.month-day {
+  text-align: center;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-top: none;
+  min-height: 100px;
+  cursor: pointer;
+}
+
+.month-day:hover {
+  background-color: #ddd;
+}
+
+/* Week View */
+.week-view-container {
+  width: 100%;
+  overflow-x: auto;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 0 0 5px 5px;
+  position: relative;
+  /* Add relative positioning for absolute elements */
+}
+
 .week-table {
   width: 100%;
   border-collapse: collapse;
@@ -133,18 +137,20 @@ body {
   border: 1px solid #ccc;
 }
 
-/* Current Time Slot Highlight */
-.week-table td.current-time-slot {
-  background-color: #ffcccc;
-}
-
-/* Week Day */
 .week-day {
   background-color: #f5f5f5;
 }
 
-/* Hover Effect for Week Day */
 .week-day:hover {
   background-color: #ddd;
   cursor: pointer;
+}
+
+/* Current time slot line */
+.current-time-slot-line {
+  top: 0;
+  left: 0;
+  right: 0;
+  border-bottom: 2px solid red !important;
+  /* Red line for the current time slot */
 }
